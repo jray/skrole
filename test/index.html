@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      #foo {
+        width: 50%;
+        height: 300%;
+        background: red;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="foo"></div>
+
+    <p class="foo-text"></p>
+
+    <p class="foo-text"></p>
+
+
+    <script src="../index.js"></script>
+    <script>
+
+      skrole
+
+        .firstScroll(function(){
+          console.log( 'first scroll')
+        })
+
+        .scroll(function( direction ){
+          console.log( 'you srolled ' + direction );
+        });
+
+      setTimeout( skrole.destroy, 5000 );
+
+    </script>
+  </body>
+</html>
