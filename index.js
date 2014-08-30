@@ -71,7 +71,7 @@
   }
 
   setInterval(function() {
-    if ( _didScroll && !_awaitingFirst ) {
+    if ( _didScroll ) {
       _didScroll = false;
       if ( _direction ) {
         _registeredHandler( _direction );
