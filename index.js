@@ -14,10 +14,22 @@
   var _noActivityTimer = null;
   var _timeout = 2000;
 
-  var onScrollTimeout = function( cb ) {
-    if ( cb && typeof cb === 'function' ) {
+  var onScrollTimeout = function() {
+    var args = Array.prototype.slice.call( arguments, 0 );
+    var cb, timeout;
+
+    if ( args.length === 2 ) {
+      cb = args[ 1 ];
+      timeout = args[ 0 ];
+      _timeout = timeout;
+    } else {
+      cb = args[ 0 ];
+    }
+
+    if ( typeof cb === 'function' ) {
       _registeredTimeoutHandler = cb;
     }
+
     return _api;
   };
 
@@ -36,7 +48,7 @@
 
   // to be fired on the first scroll and never again
   var onFirstScroll = function( cb ) {
-    if ( cb && typeof cb === 'function' ) {
+    if ( typeof cb === 'function' ) {
       _registeredFirstHandler = cb;
     }
     return _api;
@@ -90,7 +102,7 @@
       if ( _direction ) {
         _registeredHandler( _direction );
       }
-      _noActivityTimer = setTimeout( _registeredTimeoutHandler, 2000 );
+      _noActivityTimer = setTimeout( _registeredTimeoutHandler, _timeout );
     }
   }, 100);
 
