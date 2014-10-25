@@ -1,3 +1,5 @@
+Skrole doesn't perform any operations on the window scroll event, which can be detrimental to performance. Instead it passes the computation onto requestAnimationFrame. It falls back to setInterval if requestAnimationFrame is unavailable.
+
 ```javascript
   skrole
 

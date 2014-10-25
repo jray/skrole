@@ -54,8 +54,6 @@
     return _api;
   };
 
-  window.onscroll = _onScroll;
-
   // determines the scroll direction. this information
   // is passed to the scroll callback
   function _onScroll() {
@@ -93,10 +91,14 @@
     if ( _noActivityTimer ) {
       clearTimeout( _noActivityTimer );
     }
-
   }
 
-  setInterval(function() {
+  window.onscroll = _onScroll;
+
+  function worker() {
+    if ( window.requestAnimationFrame ) {
+      window.requestAnimationFrame( worker );
+    }
     if ( _didScroll ) {
       _didScroll = false;
       if ( _direction ) {
@@ -104,7 +106,14 @@
       }
       _noActivityTimer = setTimeout( _registeredTimeoutHandler, _timeout );
     }
-  }, 100);
+  }
+
+  if ( !window.requestAnimationFrame ) {
+    setInterval( worker, 100 );
+  } else {
+    worker();
+  }
+
 
   // expose the API
   _api.scroll           = onUserScroll;
