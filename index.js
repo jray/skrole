@@ -9,7 +9,17 @@
   var _direction = null;
   var _registeredHandler = function() {};
   var _registeredFirstHandler = null;
+  var _registeredTimeoutHandler = function(){};
   var _awaitingFirst = false;
+  var _noActivityTimer = null;
+  var _timeout = 2000;
+
+  var onScrollTimeout = function( cb ) {
+    if ( cb && typeof cb === 'function' ) {
+      _registeredTimeoutHandler = cb;
+    }
+    return _api;
+  };
 
   // the scroll handler
   var onUserScroll = function( cb ) {
@@ -30,7 +40,7 @@
       _registeredFirstHandler = cb;
     }
     return _api;
-  }
+  };
 
   window.onscroll = _onScroll;
 
@@ -66,8 +76,12 @@
 
     _onScroll.x = window.pageXOffset;
     _onScroll.y = window.pageYOffset;
-
     _didScroll = true;
+
+    if ( _noActivityTimer ) {
+      clearTimeout( _noActivityTimer );
+    }
+
   }
 
   setInterval(function() {
@@ -76,13 +90,15 @@
       if ( _direction ) {
         _registeredHandler( _direction );
       }
+      _noActivityTimer = setTimeout( _registeredTimeoutHandler, 2000 );
     }
   }, 100);
 
   // expose the API
-  _api.scroll       = onUserScroll;
-  _api.firstScroll  = onFirstScroll;
-  _api.destroy      = detachUserScroll;
+  _api.scroll           = onUserScroll;
+  _api.firstScroll      = onFirstScroll;
+  _api.destroy          = detachUserScroll;
+  _api.onScrollTimeout  = onScrollTimeout;
 
   if ( typeof module !== 'undefined' && module.exports ) {
     module.exports = _api;
