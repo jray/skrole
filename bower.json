@@ -1,0 +1,27 @@
+{
+  "name": "skrole",
+  "main": "index.js",
+  "version": "0.0.5",
+  "homepage": "https://github.com/jrayaustin/skrole",
+  "authors": [
+    "Johnny Ray Austin <johnny@johnnyray.me>"
+  ],
+  "description": "Light-weight/high-performance/dependency-free scroll handling for the browser",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "scroll",
+    "window"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
