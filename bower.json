@@ -1,8 +1,8 @@
 {
   "name": "skrole",
   "main": "index.js",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jrayaustin/skrole",
+  "version": "0.2.0",
+  "homepage": "https://github.com/jray/skrole",
   "authors": [
     "Johnny Ray Austin <johnny@johnnyray.me>"
   ],

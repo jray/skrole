@@ -1,5 +1,6 @@
 
-(function(){
+
+;(function(){
 
   'use strict';
 
@@ -114,22 +115,21 @@
     worker();
   }
 
-
   // expose the API
-  _api.scroll           = onUserScroll;
-  _api.firstScroll      = onFirstScroll;
-  _api.destroy          = detachUserScroll;
-  _api.onScrollTimeout  = onScrollTimeout;
+  _api.scroll   = onUserScroll;
+  // _api.first    = onFirstScroll;
+  _api.destroy  = detachUserScroll;
+  _api.idle     = onScrollTimeout;
 
   if ( typeof module !== 'undefined' && module.exports ) {
-    module.exports = _api;
+    module.exports = onUserScroll;
   } else if ( typeof define !== 'undefined' && define.amd ) {
     // AMD compatibility
     define([], function () {
-      return _api;
+      return onUserScroll;
     });
   } else {
-    window.skrole = _api;
+    window.skrole = onUserScroll;
   }
 
 }());
